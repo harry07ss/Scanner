@@ -12,7 +12,7 @@ public class Crime {
     private static final String JSON_DATE = "date";
     private static final String JSON_SOLVED = "solved";
     private static final String JSON_PHOTO = "photo";
-	
+    private static final String DEFAULT_TITLE = "default title";
     private UUID mId;//ID好
 	private String mTitle;//标题
 	private Date mDate;//日期
@@ -22,6 +22,7 @@ public class Crime {
 	public Crime(){
 		mId=UUID.randomUUID();
 		mDate=new Date();
+		mTitle=DEFAULT_TITLE;
 	}
 	
     public Crime(JSONObject json) throws JSONException {//读取

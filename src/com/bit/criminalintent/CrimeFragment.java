@@ -66,7 +66,7 @@ public class CrimeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v=inflater.inflate(R.layout.fragment_crime,parent,false);
+		View v=inflater.inflate(R.layout.fragment_scanner,parent,false);
 		
 		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			if(NavUtils.getParentActivityName(getActivity())!=null){
@@ -93,19 +93,19 @@ public class CrimeFragment extends Fragment {
 		
 		mDateButton=(Button)v.findViewById(R.id.crime_date);
 		updateDate();
-		//mDateButton.setEnabled(false);
-		mDateButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				FragmentManager fm =getActivity().getSupportFragmentManager();
-				//DatePickerFragment dialog =new DatePickerFragment();
-				DatePickerFragment dialog=DatePickerFragment.newInstance(mCrime.getDate());
-				dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
-				dialog.show(fm, DIALOG_DATE);
-				
-			}
-		});
+		mDateButton.setEnabled(false);
+//		mDateButton.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				FragmentManager fm =getActivity().getSupportFragmentManager();
+//				//DatePickerFragment dialog =new DatePickerFragment();
+//				DatePickerFragment dialog=DatePickerFragment.newInstance(mCrime.getDate());
+//				dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+//				dialog.show(fm, DIALOG_DATE);
+//				
+//			}
+//		});
 		
 		
 		mSolvedCheckBox=(CheckBox)v.findViewById(R.id.crime_solved);

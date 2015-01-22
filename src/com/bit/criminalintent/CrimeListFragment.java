@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -22,13 +23,14 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class CrimeListFragment extends ListFragment {//¿ØÖÆÆ÷²ã£¬´¦ÀíListÁĞ±íÊÓÍ¼ºÍCrimesÈİÆ÷µÄfragment£¬¼Ì³Ğ×ÔListFragment
 	private static final String TAG = "CrimeListFragment";
 	private ArrayList<Crime> mCrimes;
-
+	private ImageView mimageview;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {//´´½¨ÁĞ±íÖ§ÅäÆ÷
 		super.onCreate(savedInstanceState);
@@ -138,7 +140,7 @@ public class CrimeListFragment extends ListFragment {//¿ØÖÆÆ÷²ã£¬´¦ÀíListÁĞ±íÊÓÍ
 		public View getView(int position,View convertView,ViewGroup parent){//ÖØĞ´getview·½·¨£¬ĞŞ¸Ä·µ»ØµÄ ÊÓÍ¼
 			if(convertView==null){
 				convertView=getActivity().getLayoutInflater()
-						.inflate(R.layout.list_item_crime, null);//ÀûÓÃ±àĞ´µÄxml²¼¾Ö
+						.inflate(R.layout.list_item_scanner, null);//ÀûÓÃ±àĞ´µÄxml²¼¾Ö
 			}
 			
 			Crime c=getItem(position);
@@ -150,7 +152,15 @@ public class CrimeListFragment extends ListFragment {//¿ØÖÆÆ÷²ã£¬´¦ÀíListÁĞ±íÊÓÍ
 			dataTV.setText(c.getDate().toString());
 			CheckBox solvedCB=(CheckBox)(TextView) convertView.findViewById(R.id.crime_list_item_sCheckBox);
 			solvedCB.setChecked(c.isSolved());
-			
+			mimageview=(ImageView) convertView.findViewById(R.id.scanner_list_item_ImageView);
+			Photo p = c.getPhoto();
+	        BitmapDrawable b = null;
+	        if (p != null) {
+	            String path = getActivity()
+	                .getFileStreamPath(p.getFilename()).getAbsolutePath();
+	            b = PictureUtils.getScaledDrawable(getActivity(), path);
+	        }
+	        mimageview.setImageDrawable(b);
 			return convertView;
 		}
 		
@@ -202,6 +212,12 @@ public class CrimeListFragment extends ListFragment {//¿ØÖÆÆ÷²ã£¬´¦ÀíListÁĞ±íÊÓÍ
                 return true;
         }
         return super.onContextItemSelected(item);
+	}
+	@Override
+	public void onStop() {
+		
+		super.onStop();
+		  PictureUtils.cleanImageView(mimageview);
 	}
 	
 	
