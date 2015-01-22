@@ -29,7 +29,24 @@
     android:text="@string/crime_details_label"
     style="?android:listSeparatorTextViewStyle"
     />
-  <Button android:id="@+id/crime_date"
+ 
+   <ImageView android:id="@+id/crime_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        
+        android:scaleType="centerInside"
+        android:background="@android:color/darker_gray"
+        android:cropToPadding="true"/>
+   
+    <ImageButton android:id="@+id/crime_imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />     
+        
+    <Button android:id="@+id/crime_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
@@ -43,19 +60,6 @@
     android:text="@string/crime_solved_label"
     android:visibility="invisible"
     />
-   <ImageView android:id="@+id/crime_imageView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        
-        android:scaleType="centerInside"
-        android:background="@android:color/darker_gray"
-        android:cropToPadding="true"/>
-   
-    <ImageButton android:id="@+id/crime_imageButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_camera"
-        />     
      
  </LinearLayout>
 
