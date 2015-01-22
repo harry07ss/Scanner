@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">扫描仪</string>
+    <string name="action_settings">设置</string>
+    <string name="crime_title_hint">输入标题</string>
+    <string name="crime_title_label">扫描标题</string>
+    <string name="crime_details_label">详细内容</string>
+    <string name="crime_solved_label">是否解决？</string>
+    <string name="crime_title">扫描</string>
+    <string name="data_picker_title">扫描日期</string>
+
+</resources>
