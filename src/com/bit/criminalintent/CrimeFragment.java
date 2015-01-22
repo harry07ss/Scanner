@@ -3,6 +3,8 @@ package com.bit.criminalintent;
 import java.util.Date;
 import java.util.UUID;
 
+import com.example.scaner.ImageManipulationsActivity;
+
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -121,7 +123,7 @@ public class CrimeFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i =new Intent(getActivity(),CrimeCameraActivity.class);
+				Intent i =new Intent(getActivity(),ImageManipulationsActivity.class);
 				startActivityForResult(i, REQUEST_PHOTO);
 				
 			}
@@ -137,8 +139,7 @@ public class CrimeFragment extends Fragment {
 
                 FragmentManager fm = getActivity()
                     .getSupportFragmentManager();
-                String path = getActivity()
-                    .getFileStreamPath(p.getFilename()).getAbsolutePath();
+                String path = p.getFilename();
                 ImageFragment.createInstance(path)
                     .show(fm, DIALOG_IMAGE);		
 			}
@@ -157,8 +158,7 @@ public class CrimeFragment extends Fragment {
         Photo p = mCrime.getPhoto();
         BitmapDrawable b = null;
         if (p != null) {
-            String path = getActivity()
-                .getFileStreamPath(p.getFilename()).getAbsolutePath();
+            String path =p.getFilename();
             b = PictureUtils.getScaledDrawable(getActivity(), path);
         }
         mPhotoView.setImageDrawable(b);
@@ -200,7 +200,7 @@ public class CrimeFragment extends Fragment {
             updateDate();
         }
         if(requestCode==REQUEST_PHOTO){
-        	String filename=data.getStringExtra(CrimeCameraFragment.EXTRA_PHOY_FILENAME);
+        	String filename=data.getStringExtra(ImageManipulationsActivity.EXTRA_PHOY_FILENAME);
         	if(filename!=null){
         		Log.i(TAG,"filename:"+filename);
         		

@@ -156,8 +156,7 @@ public class CrimeListFragment extends ListFragment {//øÿ÷∆∆˜≤„£¨¥¶¿ÌList¡–±Ì ”Õ
 			Photo p = c.getPhoto();
 	        BitmapDrawable b = null;
 	        if (p != null) {
-	            String path = getActivity()
-	                .getFileStreamPath(p.getFilename()).getAbsolutePath();
+	            String path = p.getFilename();
 	            b = PictureUtils.getScaledDrawable(getActivity(), path);
 	        }
 	        mimageview.setImageDrawable(b);

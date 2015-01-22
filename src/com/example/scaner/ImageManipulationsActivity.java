@@ -53,6 +53,7 @@ import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -63,6 +64,8 @@ public class ImageManipulationsActivity extends Activity implements
 {
 	/********************* 类成员变量 **************************/
 	private static final String TAG = "OCVSample::Activity";
+
+	public static final String EXTRA_PHOY_FILENAME = "com.example.scaner.photogfilename";
 
 	private Sample3NativeCapturer mOpenCvCameraView;
 	private List<Camera.Size> mResolutionList;
@@ -104,6 +107,7 @@ public class ImageManipulationsActivity extends Activity implements
 		}
 	};
 
+
 	/*********************
 	 * onCreate 控件初始化 不能用来初始化openCV的变量类型
 	 **************************/
@@ -113,7 +117,8 @@ public class ImageManipulationsActivity extends Activity implements
 	{
 		Log.i(TAG, "called onCreate");
 		super.onCreate(savedInstanceState);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_image_manipulations);
 
@@ -262,7 +267,8 @@ public class ImageManipulationsActivity extends Activity implements
 		String currentDateandTime = sdf.format(new Date());
 		String fileName = Environment.getExternalStorageDirectory().getPath() + "/pictures/" + currentDateandTime + ".jpg";
 		String fileName2 = Environment.getExternalStorageDirectory().getPath() + "/pictures/" + currentDateandTime + "sub.jpg";
-
+		
+		boolean success=false;
 		if (mpaper != null)
 		{
 
@@ -274,10 +280,19 @@ public class ImageManipulationsActivity extends Activity implements
 			// 保存图像
 			fileName = Environment.getExternalStorageDirectory().getPath() + "/pictures/" + sdf.format(new Date()) + ".jpg";
 
-			Highgui.imwrite(fileName2, mSub);
+			 success = Highgui.imwrite(fileName2, mSub);
 			Toast.makeText(this, fileName2 + " saved ", Toast.LENGTH_SHORT).show();
-			// Highgui.imwrite(fileName, mImag);
+			//Highgui.imwrite(fileName, mImag);
 		}
+		
+		if(success){
+		Intent i=new Intent();
+		i.putExtra(EXTRA_PHOY_FILENAME, fileName2);
+		setResult(Activity.RESULT_OK,i);
+		}else{
+			setResult(Activity.RESULT_CANCELED);
+		}
+		finish();
 		return false;
 	}
 
